@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const apiKey = "958864a72037308a64dc34945af54a44";
+
 export const fetchWeatherAction = createAsyncThunk(
   "weather/fetch",
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
       const { data } = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${payload}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${payload}&units=metric&appid=${apiKey}`
       );
       return data;
     } catch (error) {
@@ -27,7 +29,7 @@ const weatherSlice = createSlice({
     });
 
     builder.addCase(fetchWeatherAction.fulfilled, (state, action) => {
-      state.weather = action && action.payload; //?
+      state.weather = action && action.payload;
       state.loading = false;
       state.error = undefined;
     });
