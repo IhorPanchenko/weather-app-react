@@ -44,6 +44,8 @@ function App() {
             type="text"
             className="search-bar"
             value={city}
+            onKeyPress={(e) => e.key === "Enter" && searchWeather()}
+            
             onInput={(e) => setCity(e.target.value)}
             placeholder="Search..."
           ></input>
